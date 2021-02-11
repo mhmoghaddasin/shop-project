@@ -1,0 +1,13 @@
+<div class="categories-shop">
+    <div class="container">
+        <div class="row">
+            {% for product in product_list %}
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                        <img class="img-fluid" src="{{ product.image.url }}" alt=""/>
+                        <a class="btn hvr-hover" href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                    </div>
+                </div>{% endfor %}
+        </div>
+    </div>
+</div>
