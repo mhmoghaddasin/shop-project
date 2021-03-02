@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.db.models import Q
 from django.views.generic import ListView
-from .models import Category
-from .models import Product
+from .models import Category, Like
+from .models import Product, Brand, ShopProduct
 # Create your views here.
 from django.views.generic import DetailView
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
+
 
 
 class ProductList(ListView):
@@ -13,12 +17,17 @@ class ProductList(ListView):
 
     def get_queryset(self):
         slug = self.kwargs.get('category_slug')
-        return super().get_queryset().filter(
+        value = self.request.GET.get('brand', None)
+        category_list = super().get_queryset().filter(
             Q(category__slug=slug) | Q(category__parent__slug=slug) | Q(category__parent__parent__slug=slug))
+        if value:
+            category_list = category_list.filter(brand__name=value)
+        return category_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['main_category'] = Category.objects.filter(parent=None)
+        context['brand'] = Brand.objects.filter(product__in=self.get_queryset())
         return context
 
 
@@ -42,6 +51,7 @@ class ProductDetailView(DetailView):
         return context
 
 
+
 class Search(ListView):
     model = Product
     template_name = 'search_result.html'
@@ -51,4 +61,17 @@ class Search(ListView):
         return super().get_queryset().filter(Q(name__icontains=search_result) |
                                              Q(slug__icontains=search_result) |
                                              Q(details__icontains=search_result))
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context['']
 
+
+@csrf_exempt
+def product_like(request):
+    get_pid = request.POST.get('pid')
+    prd = Product.objects.filter(id=get_pid).first()
+    lk = Like.objects.filter(product=prd, user=request.user)
+    if lk.exists():
+        lk.delete()
+    else:
+        Like.objects.create(product=prd, user=request.user)
+    return HttpResponse('salam')

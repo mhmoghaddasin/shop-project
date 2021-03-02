@@ -18,10 +18,8 @@ class Order(models.Model):
         verbose_name_plural = _('Orders')
 
 
-
-
     def __str__(self):
-        return (self.customer.name, 'order')
+        return '{} order'.format(self.customer.name)
 
 
 class OrderItem(models.Model):
@@ -41,7 +39,7 @@ class OrderItem(models.Model):
 
 
     def __str__(self):
-        return self.shop_product.product.name, self.order
+        return '{}, {}'.format(self.shop_product.product.name, self.order)
 
 class Basket(models.Model):
     customer = models.OneToOneField(User, related_name='basket', related_query_name='basket', verbose_name=_('customer'), on_delete=models.CASCADE, null=True, blank=True)
@@ -51,19 +49,19 @@ class Basket(models.Model):
         verbose_name_plural = _('baskets')
 
     def __str__(self):
-        return self.customer.name, 'basket'
+        return '{} basket'.format(self.customer)
 
 class BasketItem(models.Model):
     basket = models.ForeignKey("Basket", verbose_name=_('basket'), related_name='basket_items', related_query_name='basket_items', on_delete=models.CASCADE, null=True , blank=True)
-    shop_product = models.ForeignKey("products.ShopProduct", verbose_name=_('shop_product'), related_name='basket_items', related_query_name='basket_items', on_delete= models.CASCADE, null=True , blank=True)
-    count = models.IntegerField(verbose_name=_('price'), )
+    shop_product = models.OneToOneField("products.ShopProduct", verbose_name=_('shop_product'), related_name='basket_items', related_query_name='basket_items', on_delete= models.CASCADE, null=True , blank=True)
+    count = models.IntegerField(verbose_name=_('count'), )
 
     class Meta:
         verbose_name = _('basketitem')
         verbose_name_plural = _('basketitems')
 
     def __str__(self):
-        return self.shop_product.product.name, 'basket'
+        return '{} basket'.format(self.shop_product.product.name)
 
 
 class Payment(models.Model):
@@ -77,4 +75,4 @@ class Payment(models.Model):
         verbose_name_plural = _('payments')
 
     def __str__(self):
-        return self.customer.name, self.total, 'payment'
+        return '{}, {} payment'.format(self.customer.name, self.total)

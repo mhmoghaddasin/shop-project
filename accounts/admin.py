@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.forms import AdminPasswordChangeForm
 
-from .models import User
+from .models import User, Shop, Address, UserEmail
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
@@ -36,3 +36,6 @@ class UserAdmin(BaseUserAdmin):
 
 # Register your models here.
 admin.site.register(User, UserAdmin)
+admin.site.register(Shop)
+admin.site.register(Address)
+admin.site.register(UserEmail)

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -125,6 +125,10 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    {% block css %}
+    {% endblock %}
+
+
 
     <!--[if lt IE 9]>
       <script src="{% static 'js/html5shiv.js' %}"></script>
@@ -159,5 +163,9 @@
 <script src="{% static 'js/form-validator.min.js' %}"></script>
 <script src="{% static 'js/contact-form-script.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
+
+{% block js %}
+
+{% endblock %}
 </body>
 </html>

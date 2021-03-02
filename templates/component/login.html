@@ -7,7 +7,7 @@
     }
 
     /* Full-width input fields */
-    input[type=text], input[type=password] {
+    .input {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -17,7 +17,7 @@
     }
 
     /* Set a style for all buttons */
-    button {
+    .btclass {
         background-color: #4CAF50;
         color: white;
         padding: 14px 20px;
@@ -27,7 +27,7 @@
         width: 100%;
     }
 
-    button:hover {
+    .btclass:hover {
         opacity: 0.8;
     }
 
@@ -137,7 +137,7 @@
 </style>
 
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">ورود</button>
+<button class="btclass" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">ورود</button>
 
 <div id="id01" class="modal">
 
@@ -150,13 +150,13 @@
 
         <div style="text-align: right" class="container">
             <label for="uname"><b>نام کاربری</b></label>
-            <input style="text-align: right" type="text" placeholder="ایمیل خود را وارد کنید" name="username" required>
-
+            <input class='input' type="email" placeholder="ایمیل خود را وارد کنید" name="username"
+                   required>
             <label for="psw"><b>رمز عبور</b></label>
-            <input style="text-align: right" type="password" placeholder="رمز عبور خود را وارد کنید" name="password"
+            <input  class='input' type="password" placeholder="رمز عبور خود را وارد کنید" name="password"
                    required>
 
-            <button type="submit">ورود</button>
+            <button class="btclass" type="submit">ورود</button>
             <label>
                 <input type="checkbox" checked="checked" name="remember"> مرا به خاطر بسپار
             </label>

@@ -72,7 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.last_name + " " + self.first_name
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -86,7 +86,7 @@ class Address(models.Model):
         verbose_name_plural = _('addresses')
 
     def __str__(self):
-        return self.user, "address"
+        return '{} address'. format(self.user)
 
 class UserEmail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -105,7 +105,7 @@ class Shop(models.Model):
     name = models.CharField(_('Name'), max_length=150)
     description = models.CharField(_('description'), max_length=256)
     slug = models.SlugField(_('slug'), )
-    image = models.ImageField(verbose_name=_('image'), upload_to='shop/image/')
+    image = models.ImageField(verbose_name=_('image'), upload_to='shop/image/', null=True, blank=True)
 
     class Meta:
         verbose_name = _('shop')

@@ -98,13 +98,13 @@ class Image(models.Model):
         verbose_name_plural = _('Images')
 
     def __str__(self):
-        return self.product, 'image'
+        return '{}, image'.format(self.product)
 
 
 class ShopProduct(models.Model):
     shop = models.ForeignKey("accounts.Shop", related_name='ShopProduct', verbose_name=_("shop"),
                              on_delete=models.CASCADE, null=True, blank=True)
-    product = models.ForeignKey("products.Product", related_name='off', verbose_name=_("product"),
+    product = models.ForeignKey("products.Product", related_name='shop_product', verbose_name=_("product"),
                                 on_delete=models.CASCADE,
                                 null=True, blank=True)
     price = models.IntegerField(_('price'), )
@@ -132,7 +132,7 @@ class Comment(models.Model):
         verbose_name_plural = _('comments')
 
     def __str__(self):
-        return self.user, self.product, 'comment'
+        return '{}, {}, comment'.format(self.user, self.product)
 
 
 class Like(models.Model):
@@ -146,4 +146,4 @@ class Like(models.Model):
         verbose_name_plural = _('likes')
 
     def __str__(self):
-        return self.user, self.product, 'like'
+        return '{}, {}, like'.format(self.user, self.product)

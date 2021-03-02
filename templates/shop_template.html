@@ -132,18 +132,18 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                     <div class="row">
-                                        {% for product in product_list %}
+                                        {% for shop_product in shopproduct_list %}
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="products-single fix">
                                                     <div class="box-img-hover">
                                                         <div class="type-lb">
-                                                            <p class="sale">Sale</p>
+                                                            <p class="sale">sale</p>
                                                         </div>
-                                                        <img src="{{ product.image.url }}" class="img-fluid"
+                                                        <img src="{{ shop_product.product.image.url }}" class="img-fluid"
                                                              alt="Image">
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                <li><a href="{{ product.get_absolute_url }}"
+                                                                <li><a href="{{ shop_product.product.get_absolute_url }}"
                                                                        data-toggle="tooltip" data-placement="right"
                                                                        title="View"><i class="fas fa-eye"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip"
@@ -157,8 +157,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
-                                                        <h4>{{ product.name }}</h4>
-                                                        <h5> {{ product.shop_product.all.first.price }} تومان </h5>
+                                                        <h4>{{ shop_product.product.name }}</h4>
+                                                        <h5> $9.79</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -326,6 +326,7 @@
 
 
 {% endblock %}
+
 
 
 

@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    پروفایل کاربر
+{% endblock %}
+{% block content %}
+    {{ user.first_name }}
+    {{ user.last_name }}
+{% endblock %}
